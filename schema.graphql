@@ -1,0 +1,143 @@
+directive @createEntity(model: String) on FIELD_DEFINITION
+directive @createEntities(model: String) on FIELD_DEFINITION
+directive @readEntity(model: String) on FIELD_DEFINITION
+directive @readEntities(model: String) on FIELD_DEFINITION
+directive @updateEntity(model: String) on FIELD_DEFINITION
+directive @updateEntities(model: String) on FIELD_DEFINITION
+directive @deleteEntity(model: String) on FIELD_DEFINITION
+directive @deleteEntities(model: String) on FIELD_DEFINITION
+directive @reference on FIELD_DEFINITION
+directive @jsonata(expression: String) on FIELD_DEFINITION
+directive @workflow(id: String) on FIELD_DEFINITION
+
+input StringFilter {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String]
+  _like: String
+  _lt: String
+  _lte: String
+  _ne: String
+  _nin: [String]
+}
+
+input UpdateReference {
+  _connect: [String]
+  _disconnect: [String]
+}
+
+enum SortEnum {
+  asc
+  desc
+}
+
+----------------
+
+type User {
+  id: String
+  name: String
+  accounts: [Account] @reference
+}
+
+input UserFilter {
+  id: StringFilter
+  name: StringFilter
+  _or: [UserFilterOr]
+}
+
+input UserFilterOr {
+  id: StringFilter
+  name: StringFilter
+}
+
+input UserSort {
+  id: SortEnum
+  name: SortEnum
+  accounts: SortEnum
+}
+
+input UserCreate {
+  id: String
+  name: String
+  accounts: [String]
+}
+
+input UserUpdate {
+  name: String
+  accounts: UpdateReference
+}
+
+type Account {
+  id: String
+  name: String
+  users: [User] @reference
+}
+
+input AccountFilter {
+  id: StringFilter
+  name: StringFilter
+  _or: [AccountFilterOr]
+}
+
+input AccountFilterOr {
+  id: StringFilter
+  name: StringFilter
+}
+
+input AccountSort {
+  id: SortEnum
+  name: SortEnum
+  users: SortEnum
+}
+
+input AccountCreate {
+  id: String
+  name: String
+  users: [String]
+}
+
+input AccountUpdate {
+  name: String
+  users: UpdateReference
+}
+
+type Query {
+  account(id: ID): Account
+    @readEntity(model: "accounts")
+  accounts(where: AccountFilter, orderBy: [AccountSort], skip: Int, first: Int): [Account]
+    @readEntity(model: "accounts")
+  user(id: ID): User
+    @readEntity(model: "user")
+  users(where: UserFilter, orderBy: [UserSort], skip: Int, first: Int): [User]
+    @readEntity(model: "user")
+}
+
+type Mutation {
+  createAccount(data: AccountCreate): Account
+    @createEntity(model: "account")
+  createAccounts(data: [AccountCreate]): [Account]
+    @createEntities(model: "account")
+  updateAccount(id: ID, data: AccountUpdate): Account
+    @updateEntity(model: "account")
+  updateAccounts(where: AccountFilter, data: AccountUpdate): [Account]
+    @updateEntities(model: "account")
+  deleteAccount(id: ID): Account
+    @deleteEntity(model: "account")
+  deleteAccounts(where: AccountFilter): [Account]
+    @deleteEntities(model: "account")
+
+  createUser(data: UserCreate): User
+    @createEntity(model: "user")
+  createUsers(data: [UserCreate]): [User]
+    @createEntities(model: "user")
+  updateUser(id: ID, data: UserUpdate): User
+    @updateEntity(model: "user")
+  updateUsers(where: UserFilter, data: UserUpdate): [User]
+    @updateEntities(model: "user")
+  deleteUser(id: ID): User
+    @deleteEntity(model: "user")
+  deleteUsers(where: UserFilter): [User]
+    @deleteEntities(model: "user")
+}
