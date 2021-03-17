@@ -1,0 +1,23 @@
+{
+  "name": "0",
+  "keys": [
+    {
+      "name": "id",
+      "datatype": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "name",
+      "datatype": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "email",
+      "datatype": {
+        "type": "string"
+      }
+    }
+  ]
+}
