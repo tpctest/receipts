@@ -18,6 +18,9 @@
       "datatype": {
         "type": "string"
       }
+    },
+    {
+        "name": "something new"
     }
   ]
 }
