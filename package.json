@@ -1,0 +1,26 @@
+{
+  "dependencies": {},
+  "name": "receipts",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tpctest:s6ncPzhRvHnhdPhQKHb3aiNC@github.com/tpctest/receipts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tpctest/receipts/issues"
+  },
+  "homepage": "https://github.com/tpctest/receipts#readme",
+  "description": ""
+}
